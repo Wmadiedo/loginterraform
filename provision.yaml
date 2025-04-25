@@ -1,0 +1,55 @@
+- name: Setup Webapp
+  hosts: azure
+  become: yes
+  vars:
+    app_dir: /home/grimoire/webapp
+  tasks:
+    - name: Install dependencies
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      loop:
+        - nodejs
+        - npm
+        - sqlite3
+        - nginx
+
+    - name: Clone project
+      git:
+        repo: "https://github.com/Wmadiedo/loginterraform"
+        dest: "{{ app_dir }}"
+
+    - name: Install backend deps
+      npm:
+        path: "{{ app_dir }}"
+
+    - name: Start app with PM2
+      npm:
+        path: "{{ app_dir }}"
+        state: present
+        executable: pm2
+      environment:
+        NODE_ENV: production
+
+    - name: Enable reverse proxy in NGINX
+      copy:
+        dest: /etc/nginx/sites-available/default
+        content: |
+          server {
+            listen 80;
+            location / {
+              proxy_pass http://localhost:3000;
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection 'upgrade';
+              proxy_set_header Host $host;
+              proxy_cache_bypass $http_upgrade;
+            }
+          }
+      notify: restart nginx
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
