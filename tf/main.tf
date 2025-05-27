@@ -51,7 +51,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   admin_ssh_key {
     username   = "wollmanhoyos"
-    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ..." # reemplázalo con tu clave pública real
+    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ..."
   }
 
   os_disk {
