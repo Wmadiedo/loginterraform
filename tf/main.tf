@@ -55,7 +55,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   admin_ssh_key {
     username   = "wollmanhoyos"
-    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCPzlJmJSeMzPeap7RuKR1JAXS3TZNvT7jUMqacMGjW2Mis5yqYwxmoJ67k0UF3XoAYmlI7nIQU5gRuan2XS3/4ektnQ3hlni3qZ6MaBeTJkVKb8M01cl/QqMx8x2SnMHu4mF9D9BuH4WEgIhMjZzKeTfL/gaeDNkdHN8NFjP2c1arJNvwb/ew6/jvlFCzT9jAiV3HUlPYqpIjKsigYQXPFWjLlXugozHgQ0g0n/CvyIl04d9Xe1P4Y0q4jcQ8tcTQUiX8LdPkkUANulBihyIaQZW6jzb9PAUHwbNUcXlYjqywOk0Z5CRU9kDqW4jKmMuYcKrhBRcaTObqd/XAnC+Yzgcdsnv2+rCSzc+RwRJQdELG1gke/N48YcyhJ5j0Hp8kLeYYEDzYP6gKeh8+JEuqKuCJ1GWjXgYJKoEwmRyYDWROgajwoJhoCsPY/xourXeipXDnAy/1RV7+wJPlgbY2/pNMCgpIieStV0pkS8VJQAEKnSp1iqk4oDit6ik/tiUj5OjbJr4rxwuuof3wDrKqpwIOSkf7BckzFOzIzE7bzrYFRfBtQBzCGoDOz9kexQil/SX4N0SqoSoVMbHEKqJwECZjivZTk4NLadFZ5Q30w/Xe61zfvHKz6ByUyWwSBtI395qi8RiCyQcJYnMSMoNQycrj+JyNIqhlnPKDUP8MR+w== luis@SandboxHost-638839735151658856"
+    public_key = file("~/.ssh/id_rsa.pub")
   }
 
   os_disk {
