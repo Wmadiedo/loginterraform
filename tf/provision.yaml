@@ -2,7 +2,7 @@
   hosts: azure
   become: yes
   vars:
-    app_dir: /home/grimoire/webapp
+    app_dir: /home/user/webapp
   tasks:
     - name: Install dependencies
       apt:
