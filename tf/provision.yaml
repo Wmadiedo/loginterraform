@@ -14,6 +14,11 @@
         - sqlite3
         - nginx
 
+    - name: Install PM2 globally
+      npm:
+        name: pm2
+        global: yes
+
     - name: Clone project
       git:
         repo: "https://github.com/Wmadiedo/loginterraform"
@@ -24,10 +29,9 @@
         path: "{{ app_dir }}"
 
     - name: Start app with PM2
-      npm:
-        path: "{{ app_dir }}"
-        state: present
-        executable: pm2
+      command: pm2 start index.js
+      args:
+        chdir: "{{ app_dir }}"
       environment:
         NODE_ENV: production
 
